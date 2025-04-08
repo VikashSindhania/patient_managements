@@ -1,70 +1,160 @@
-# Getting Started with Create React App
+# Patient Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern web application for managing patient records using React, Material-UI, and Google Sheets API.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- 📝 Add new patient records
+- 📋 View patient details
+- 🔍 Search and filter patients
+- 📊 Store data in Google Sheets
+- 🔐 Secure authentication with Google OAuth
+- 📱 Responsive design for all devices
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: React.js, Material-UI
+- **Authentication**: Google OAuth
+- **Data Storage**: Google Sheets API
+- **State Management**: React Context API
+- **Testing**: Jest, React Testing Library
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## User Flow
 
-### `npm test`
+### 1. Authentication Flow
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```mermaid
+graph TD
+    A[User Opens App] --> B{Is User Logged In?}
+    B -->|No| C[Redirect to Google Login]
+    C --> D[User Authenticates with Google]
+    D --> E[Redirect Back to App]
+    B -->|Yes| F[Show Dashboard]
+```
 
-### `npm run build`
+### 2. Patient Management Flow
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```mermaid
+graph TD
+    A[Dashboard] --> B{User Action}
+    B -->|Add Patient| C[Open Add Patient Form]
+    B -->|View Patients| D[Show Patient List]
+    B -->|Search| E[Show Search Interface]
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    C --> F[Fill Patient Details]
+    F --> G[Save to Google Sheets]
+    G --> H[Show Success Message]
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    D --> I[Display Patient Cards]
+    I --> J[Click to View Details]
 
-### `npm run eject`
+    E --> K[Enter Search Criteria]
+    K --> L[Filter Patient List]
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 3. Data Flow
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```mermaid
+graph LR
+    A[User Interface] --> B[React Components]
+    B --> C[Context API]
+    C --> D[Google Sheets API]
+    D --> E[Google Sheets]
+    E --> D
+    D --> C
+    C --> B
+    B --> A
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Getting Started
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Prerequisites
 
-## Learn More
+- Node.js (v14 or higher)
+- npm or yarn
+- Google Cloud Platform account
+- Google Sheets API enabled
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Installation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clone the repository:
 
-### Code Splitting
+```bash
+git clone https://github.com/VikashSindhania/Patient-Management.git
+cd Patient-Management
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Install dependencies:
 
-### Analyzing the Bundle Size
+```bash
+npm install
+# or
+yarn install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. Set up environment variables:
 
-### Making a Progressive Web App
+   - Copy `.env.example` to `.env`
+   - Fill in your Google OAuth credentials and other configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+4. Start the development server:
 
-### Advanced Configuration
+```bash
+npm start
+# or
+yarn start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Environment Variables
 
-### Deployment
+Create a `.env` file in the root directory with the following variables:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```env
+REACT_APP_GOOGLE_CLIENT_ID=your_client_id_here
+REACT_APP_GOOGLE_CLIENT_SECRET=your_client_secret_here
+REACT_APP_GOOGLE_REDIRECT_URI=http://localhost:3000/auth/callback
+REACT_APP_SPREADSHEET_ID=your_spreadsheet_id_here
+REACT_APP_SHEET_NAME=your_sheet_name_here
+```
 
-### `npm run build` fails to minify
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+patient-management/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── patient/
+│   │   └── common/
+│   ├── services/
+│   ├── context/
+│   ├── utils/
+│   └── App.js
+├── .env.example
+├── package.json
+└── README.md
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Material-UI for the beautiful components
+- Google Sheets API for data storage
+- React community for amazing tools and libraries
+
+## Contact
+
+Vikash Sindhania - [GitHub](https://github.com/VikashSindhania)
+
+Project Link: [https://github.com/VikashSindhania/Patient-Management](https://github.com/VikashSindhania/Patient-Management)
