@@ -1,8 +1,12 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders navigation menu items", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByText(/Select File/i)).toBeInTheDocument();
+  expect(screen.getByText(/Add Patient/i)).toBeInTheDocument();
+  expect(screen.getByText(/Edit Patient/i)).toBeInTheDocument();
+  expect(screen.getByText(/Search/i)).toBeInTheDocument();
 });
